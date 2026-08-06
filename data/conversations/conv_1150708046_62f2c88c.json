@@ -1,0 +1,38 @@
+{
+  "session_id": "62f2c88c",
+  "created_at": "2026-08-06T03:09:19.795454",
+  "updated_at": "2026-08-06T03:09:19.795454",
+  "student_info": {
+    "name": "Andres",
+    "email": "esquizhpeon@uide.edu.ec",
+    "cedula": "1150708046"
+  },
+  "triage_summary": {
+    "current_level": "BAJO",
+    "level_info": {
+      "color": "#4CAF50",
+      "icon": "🟢",
+      "description": "Malestar leve, sin riesgo aparente",
+      "recommendation": "Autocuidado y agendar una consulta psicológica programada."
+    },
+    "messages_analyzed": 1,
+    "scores": {
+      "BAJO": 0,
+      "MEDIO": 0,
+      "ALTO": 0,
+      "CRITICO": 0
+    }
+  },
+  "total_messages": 2,
+  "messages": [
+    {
+      "role": "user",
+      "content": "hola como estas?"
+    },
+    {
+      "role": "assistant",
+      "content": "¡Hola! Gracias por preguntar. Estoy aquí, completamente disponible para ti y para escucharte con atención.\n\nMe alegra mucho que hayas dado el primer paso para escribir. Quiero que sepas que este es un espacio seguro y sin juicios, donde puedes tomarte el tiempo que necesites para expresar lo que te trae por aquí.\n\nPara poder ayudarte de la mejor manera posible, me gustaría empezar con una pregunta sencilla:\n\n**¿Qué te motiva a buscar apoyo hoy?** Puede ser algo que te preocupa, una situación que te genera malestar, o simplemente una sensación que quieras compartir. No hay una respuesta correcta o incorrecta, solo tu experiencia.",
+      "triage_level": "BAJO"
+    }
+  ]
+}

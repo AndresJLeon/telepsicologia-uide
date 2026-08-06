@@ -1,0 +1,28 @@
+{
+  "session_id": "test_sess_123",
+  "created_at": "2026-08-05T18:28:03.519197",
+  "updated_at": "2026-08-05T19:59:46.585655",
+  "student_info": {
+    "name": "Prueba Alumno",
+    "email": "prueba@epn.edu.ec",
+    "cedula": "0987654321"
+  },
+  "triage_summary": {
+    "current_level": "BAJO",
+    "scores": {
+      "BAJO": 1
+    }
+  },
+  "total_messages": 2,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hola"
+    },
+    {
+      "role": "assistant",
+      "content": "Hola, ¿cómo estás?",
+      "triage_level": "BAJO"
+    }
+  ]
+}

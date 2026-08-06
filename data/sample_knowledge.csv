@@ -1,0 +1,37 @@
+categoria,tema,pregunta_frecuente,respuesta,detalle
+Ansiedad,Sintomas,"¿Cuáles son los síntomas más comunes de la ansiedad?",
+"Los síntomas más comunes incluyen: preocupación excesiva, inquietud, dificultad para concentrarse, irritabilidad, tensión muscular, problemas de sueño y ataques de pánico. La ansiedad también puede manifestarse físicamente con sudoración, palpitaciones y mareos.",
+"La ansiedad es una respuesta natural del cuerpo ante situaciones de estrés, pero cuando es persistente y desproporcionada, puede Convertirse en un trastorno que requiere atención profesional."
+Ansiedad,Tecnica_de_relajacion,"¿Cómo puedo controlar un ataque de ansiedad?",
+"Técnicas inmediatas: 1) Respiración 4-7-8: inhala 4 segundos, retén 7, exhala 8. 2) Anclaje 5-4-3-2-1: nombra 5 cosas que ves, 4 que tocas, 3 que escuchas, 2 que hueles, 1 que saboreas. 3) Respira lentamente y concéntrate en el momento presente.",
+"Estas técnicas activan el sistema nervioso parasimpático y ayudan a reducir la respuesta de lucha o huida. Si los ataques son frecuentes, consulta a un profesional."
+Depresion,Señales,"¿Cómo sé si estoy deprimido?",
+"Señales frecuentes: tristeza persistente (más de 2 semanas), pérdida de interés en actividades que antes disfrutabias, cambios en el apetito o peso, insomnio o hipersomnia, fatiga, sentimientos de inutilidad, dificultad para concentrarse, y en casos graves, pensamientos de muerte.",
+"La depresión es una condición médica tratable. No es debilidad ni falta de voluntad. Buscar ayuda profesional es el primer paso para recuperarse."
+Depresion,Ayuda,"¿La depresión tiene cura?",
+"La depresión es altamente tratable. Entre las opciones están: terapia cognitivo-conductual, terapia interpersonal, medicación antidepresiva (prescrita por psiquiatra), ejercicio regular, rutina de sueño saludable y apoyo social. La mayoría de las personas mejoran significativamente con tratamiento.",
+"El tratamiento más efectivo combina psicoterapia y, cuando es necesario, medicación. El tiempo de recuperación varía según la persona y la gravedad."
+Estrés,Coping,"¿Cómo manejo el estrés del trabajo/estudios?",
+"Estrategias efectivas: 1) Priorizar y delegar tareas. 2) Establecer límites claros entre trabajo y descanso. 3) Practicar mindfulness o meditación 10 minutos diarios. 4) Hacer ejercicio físico regular. 5) Mantener horarios de sueño consistentes. 6) Buscar apoyo social. 7) Tomar descansos breves durante la jornada.",
+"El estrés crónico afecta la salud física y mental. Implementar estas estrategias de forma gradual puede generar mejoras significativas en semanas."
+Estrés,Burnout,"¿Qué es el burnout y cómo lo supero?",
+"El burnout o agotamiento profesional se caracteriza por: agotamiento emocional, despersonalización y baja realización personal. Para superarlo: reconoce los límites, busca apoyo, reevalúa prioridades, considera cambios en el entorno laboral, y busca ayuda profesional si es necesario.",
+"El burnout no es solo 'cansancio'. Es una condición que requiere intervención. Si trabajas en un entorno tóxico, considera alternativas de cambio."
+Relaciones,Conflictos,"¿Cómo mejorar mi comunicación en relaciones?",
+"Técnicas de comunicación efectiva: 1) Escucha activa: presta atención sin interrumpir. 2) Usa mensajes Yo: 'Me siento...' en vez de 'Tú siempre...'. 3) Valida la emocion del otro aunque no estés de acuerdo. 4) Elige el momento adecuado para hablar. 5) Busca soluciones, no ganar la discusión.",
+"La comunicación asertiva es una habilidad que se puede aprender. La terapia de pareja o individual puede ayudar a mejorar patrones de relación."
+Relaciones,Duelo,"¿Cómo supero la pérdida de alguien importante?",
+"El duelo es un proceso personal sin plazo fijo. Permitite sentir el dolor, no te presiones para 'superarlo rápido'. Busca apoyo de personas de confianza, mantén rutinas básicas, cuida tu alimentación y sueño. Si el duelo te paraliza por meses, considera terapia de duelo.",
+"Cada persona vive el duelo de manera diferente. No hay una forma correcta o incorrecta de sentir. El acompañamiento profesional puede ser especialmente útil en duelos complicados."
+Salud_Mental,General,"¿Qué diferencia hay entre psicólogo y psiquiatra?",
+"El psicólogo realiza psicoterapia (terapia de conversación) y evalúa procesos cognitivos y emocionales. El psiquiatra es médico especializado en salud mental y puede prescribir medicamentos. Lo ideal es un trabajo conjunto cuando es necesario.",
+"La salud mental puede requerir intervenciones de ambos profesionales. No son excluyentes, son complementarios."
+Salud_Mental,Autocuidado,"¿Qué hábitos mejoran la salud mental?",
+"Hábitos clave: 1) Dormir 7-9 horas. 2) Ejercicio regular (caminar 30 min). 3) Alimentación equilibrada. 4) Conexión social significativa. 5) Limitar redes sociales. 6) Practicar gratitud. 7) Tiempo al aire libre. 8) Actividades que disfrutes. 9) Decir no cuando sea necesario. 10) Pedir ayuda cuando la necesites.",
+"El autocuidado no es egoísmo, es necesidad. Estos hábitos son la base de la salud mental y complementan cualquier tratamiento profesional."
+Salud_Mental,Consulta,"¿Cuándo debo buscar ayuda profesional?",
+"Busca ayuda cuando: los síntomas duran más de 2 semanas, afectan tu funcionamiento diario, sientes que no puedes manejarlo solo, usas sustancias para sobrellevar, tienes pensamientos de hacerte daño, o simplemente sientes que necesitas hablar con alguien. No esperes a estar en crisis.",
+"Buscar ayuda a tiempo es un acto de valentía, no de debilidad. Los profesionales están para acompañarte en el proceso."
+Crisis,Intervencion,"¿Qué hacer si alguien cercano tiene ideación suicida?",
+"Pasos importantes: 1) Toma en serio la amenaza. 2) Escucha sin juzgar. 3) No dejes a la persona sola. 4) Llama a línea de crisis. 5) Retira acceso a medios letales. 6) Busca ayuda profesional inmediata. 7) Cuida tu propia salud mental también.",
+"Si alguien te confía ideación suicida, no es tu responsabilidad 'arreglarlo'. Tu rol es acompañar y conectar con profesionales. Nunca dejes a la persona sola si hay riesgo inmediato."

@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+chroma_db/
+*.db
+.vscode/
+.idea/
+venv/
+.venv/
+ia2026A/
+scratch/
+.streamlit/secrets.toml

@@ -1,0 +1,38 @@
+{
+  "session_id": "d2423cdc",
+  "created_at": "2026-08-05T19:57:58.664830",
+  "updated_at": "2026-08-05T19:57:58.664830",
+  "student_info": {
+    "name": "jose",
+    "email": "esquizhpeon@uide.edu.",
+    "cedula": "1150708012"
+  },
+  "triage_summary": {
+    "current_level": "BAJO",
+    "level_info": {
+      "color": "#4CAF50",
+      "icon": "🟢",
+      "description": "Malestar leve, sin riesgo aparente",
+      "recommendation": "Autocuidado y agendar una consulta psicológica programada."
+    },
+    "messages_analyzed": 1,
+    "scores": {
+      "BAJO": 0,
+      "MEDIO": 0,
+      "ALTO": 0,
+      "CRITICO": 0
+    }
+  },
+  "total_messages": 2,
+  "messages": [
+    {
+      "role": "user",
+      "content": "hola me siento mal"
+    },
+    {
+      "role": "assistant",
+      "content": "Hola, gracias por escribirme. Lamento mucho que te estés sintiendo mal en este momento. Es un primer paso muy importante el que estés reconociendo y expresando cómo te sientes. Quiero que sepas que estoy aquí para escucharte y orientarte.\n\nPara poder comprender mejor tu situación y brindarte la ayuda más adecuada, me gustaría hacerte una pregunta:\n\n**¿Podrías contarme un poco más sobre qué es lo que te está haciendo sentir mal?** Por ejemplo, ¿hay algún pensamiento, situación o emoción en particular que esté ocupando tu mente en estos días?",
+      "triage_level": "BAJO"
+    }
+  ]
+}
