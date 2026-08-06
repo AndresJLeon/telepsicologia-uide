@@ -38,14 +38,17 @@ st.markdown("""
         font-size: 14px;
         display: inline-block;
         margin: 4px 0;
-    }
     .disclaimer {
-        background-color: #fff3cd;
-        border: 1px solid #ffc107;
+        background-color: #fff3cd !important;
+        color: #533f03 !important;
+        border: 1px solid #ffebaa !important;
+        border-left: 5px solid #ffc107 !important;
         border-radius: 8px;
-        padding: 12px;
-        margin-bottom: 16px;
-        font-size: 13px;
+        padding: 14px 16px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 500;
     }
 </style>
 """, unsafe_allow_html=True)
