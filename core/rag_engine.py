@@ -17,6 +17,8 @@ class RAGEngine:
         self.collection_name = "telepsicologia_kb"
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
         self.reset_due_to_mismatch = False
+        self._embeddings_cache = {}
+        self._search_cache = {}
         self._init_chroma()
         self._check_dimension_compatibility()
 
@@ -49,6 +51,7 @@ class RAGEngine:
                 metadata={"hnsw:space": "cosine"},
             )
             self.reset_due_to_mismatch = True
+            self._search_cache.clear()
         except Exception:
             pass
 
@@ -68,15 +71,34 @@ class RAGEngine:
             pass
 
     def _get_embeddings(self, texts: List[str]) -> List[List[float]]:
-        """Generate embeddings using local Sentence Transformers model."""
-        embeddings = self.model.encode(texts, show_progress_bar=False)
-        return embeddings.tolist()
+        """Generate embeddings using local Sentence Transformers model with caching."""
+        results = []
+        texts_to_compute = []
+        compute_indices = []
+
+        for idx, text in enumerate(texts):
+            clean_text = text.strip()
+            if clean_text in self._embeddings_cache:
+                results.append(self._embeddings_cache[clean_text])
+            else:
+                results.append(None)
+                texts_to_compute.append(clean_text)
+                compute_indices.append(idx)
+
+        if texts_to_compute:
+            encoded = self.model.encode(texts_to_compute, show_progress_bar=False).tolist()
+            for text, emb, orig_idx in zip(texts_to_compute, encoded, compute_indices):
+                self._embeddings_cache[text] = emb
+                results[orig_idx] = emb
+
+        return results
 
     def index_chunks(self, chunks: List[Dict]) -> int:
         """Index text chunks into ChromaDB. Returns number of chunks indexed."""
         if not chunks:
             return 0
 
+        self._search_cache.clear()
         batch_size = 100
         total_indexed = 0
 
@@ -116,7 +138,13 @@ class RAGEngine:
         return total_indexed
 
     def search(self, query: str, n_results: int = 3) -> List[Dict]:
-        """Search for relevant chunks given a query."""
+        """Search for relevant chunks given a query, with caching for fast retrieval."""
+        clean_query = query.strip().lower()
+        cache_key = f"{clean_query}_{n_results}"
+
+        if cache_key in self._search_cache:
+            return self._search_cache[cache_key]
+
         try:
             if not hasattr(self, "collection") or self.collection.count() == 0:
                 return []
@@ -137,9 +165,9 @@ class RAGEngine:
                         "distance": results["distances"][0][i] if results["distances"] else 0,
                     })
 
+            self._search_cache[cache_key] = search_results
             return search_results
         except Exception as e:
-            # Si ocurre un error de compactacion HNSW durante la busqueda, capturar limpiamente
             if any(term in str(e).lower() for term in ["compaction", "hnsw", "segment", "log", "corrupt"]):
                 self._wipe_and_reinit()
                 return []

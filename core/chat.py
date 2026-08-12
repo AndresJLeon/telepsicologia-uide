@@ -31,6 +31,7 @@ class ChatHandler:
         self.triage = TriageEngine()
         self.messages: List[Dict] = []
         self.chat_history: List[Dict] = []
+        self._response_cache: Dict[str, str] = {}
         self._init_system_message()
 
     def set_api_key(self, api_key: str):
@@ -65,14 +66,24 @@ class ChatHandler:
                 {"role": "assistant", "content": "Entendido, tomare en cuenta el contexto proporcionado para orientar al usuario."}
             )
 
-    def get_response_stream(self, user_message: str) -> Generator[str, None, None]:
-        """Transmite la respuesta de la API de DeepSeek en tiempo real."""
+    def get_response_stream(
+        self, user_message: str, status_callback: Optional[callable] = None
+    ) -> Generator[str, None, None]:
+        """Transmite la respuesta de la API de DeepSeek notificando estados intermedios."""
         if not self.is_configured():
             yield "⚠️ No se ha configurado la API Key de DeepSeek. Por favor, ingresa tu clave API en la barra lateral para continuar."
             return
 
+        if status_callback:
+            status_callback("🔍 Analizando triaje y nivel de urgencia...")
         self.triage.analyze_message(user_message)
+
+        if status_callback:
+            status_callback("🧠 Consultando Base de Conocimiento (RAG)...")
         self.update_system_with_rag(user_message)
+
+        if status_callback:
+            status_callback("✍️ Generando orientación empática...")
 
         self.messages.append({"role": "user", "content": user_message})
         self.chat_history.append({"role": "user", "content": user_message})
@@ -126,6 +137,14 @@ class ChatHandler:
             error_msg = f"Error al comunicarse con la API de DeepSeek: {str(e)}"
             self.messages.append({"role": "assistant", "content": error_msg})
             return error_msg
+
+    def load_previous_messages(self, messages: List[Dict]):
+        """Carga una lista de mensajes anteriores en el estado del handler."""
+        self.messages = list(messages)
+        self.chat_history = [{"role": "system", "content": PROMPT_TELEPSICOLOGIA}]
+        for m in self.messages:
+            if m.get("role") in ["user", "assistant"]:
+                self.chat_history.append({"role": "user" if m["role"] == "user" else "assistant", "content": m["content"]})
 
     def get_conversation_history(self) -> List[Dict]:
         return self.messages

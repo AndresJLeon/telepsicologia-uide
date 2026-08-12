@@ -48,3 +48,18 @@ class CrisisAlertLog:
                     email_result.get("error") or "",
                 ]
             )
+
+    def get_history(self) -> list:
+        """Retorna el historial de alertas registradas como lista de diccionarios."""
+        self._ensure_file()
+        records = []
+        if not os.path.exists(self.log_path):
+            return records
+        try:
+            with open(self.log_path, "r", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    records.append(dict(row))
+        except Exception:
+            pass
+        return records

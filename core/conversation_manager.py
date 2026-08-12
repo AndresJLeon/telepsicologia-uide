@@ -54,10 +54,14 @@ class ConversationManager:
     def get_filepath(self, cedula: str, session_id: str) -> str:
         return self._get_filename(cedula, session_id)
 
-    def list_saved_conversations(self) -> List[Dict]:
-        """Devuelve la lista de conversaciones guardadas con su metadato basico."""
+    def list_saved_conversations(self, cedula: Optional[str] = None) -> List[Dict]:
+        """Devuelve la lista de conversaciones guardadas con su metadato basico.
+        Si se especifica cedula, solo retorna las conversaciones de ese estudiante.
+        """
         if not os.path.exists(self.storage_dir):
             return []
+
+        clean_target_cedula = "".join(filter(str.isalnum, str(cedula))) if cedula else None
 
         convs = []
         for filename in os.listdir(self.storage_dir):
@@ -66,16 +70,23 @@ class ConversationManager:
                 try:
                     with open(full_path, "r", encoding="utf-8") as f:
                         data = json.load(f)
+                        student_info = data.get("student_info", {})
+                        conv_cedula = "".join(filter(str.isalnum, str(student_info.get("cedula", ""))))
+
+                        if clean_target_cedula and conv_cedula != clean_target_cedula:
+                            continue
+
                         convs.append({
                             "filename": filename,
                             "filepath": full_path,
                             "session_id": data.get("session_id"),
-                            "student_name": data.get("student_info", {}).get("name", "N/A"),
-                            "cedula": data.get("student_info", {}).get("cedula", "N/A"),
-                            "email": data.get("student_info", {}).get("email", "N/A"),
+                            "student_name": student_info.get("name", "N/A"),
+                            "cedula": student_info.get("cedula", "N/A"),
+                            "email": student_info.get("email", "N/A"),
                             "updated_at": data.get("updated_at"),
                             "total_messages": data.get("total_messages", 0),
                             "triage_level": data.get("triage_summary", {}).get("current_level", "N/A"),
+                            "messages": data.get("messages", []),
                         })
                 except Exception:
                     continue

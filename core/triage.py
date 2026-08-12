@@ -5,6 +5,8 @@ from config.prompt import TRIAGE_KEYWORDS, TRIAGE_LEVELS
 class TriageEngine:
     """Engine for classifying mental health urgency levels based on conversation."""
 
+    LEVEL_RANK = {"BAJO": 1, "MEDIO": 2, "ALTO": 3, "CRITICO": 4}
+
     def __init__(self):
         self.history: List[Dict] = []
         self.current_level = "BAJO"
@@ -26,18 +28,24 @@ class TriageEngine:
             "scores": dict(self.urgency_scores),
         })
 
-        self.current_level = self._calculate_level()
+        new_level = self._calculate_level()
+        if self.LEVEL_RANK.get(new_level, 1) > self.LEVEL_RANK.get(self.current_level, 1):
+            self.current_level = new_level
         return self.current_level
 
     def _calculate_level(self) -> str:
         """Calculate the overall urgency level from accumulated scores."""
         scores = self.urgency_scores
 
-        if scores["CRITICO"] >= 4:
+        if scores["CRITICO"] > 0:
             return "CRITICO"
         if scores["ALTO"] >= 4:
             return "ALTO"
         if scores["MEDIO"] >= 3:
+            return "MEDIO"
+        if scores["ALTO"] > 0:
+            return "ALTO"
+        if scores["MEDIO"] > 0:
             return "MEDIO"
         return "BAJO"
 
