@@ -286,6 +286,82 @@ def auto_save_current_conversation():
         )
 
 
+def render_intake_gate():
+    """Formulario de registro del estudiante con validaciones estrictas y algoritmo Módulo 10 de Cédula Ecuatoriana."""
+    st.markdown("""
+    <div class="uide-header-banner">
+        <h1>🧠 Telepsicología UIDE - Orientación en Salud Mental</h1>
+        <p>Universidad Internacional del Ecuador | Sistema Integrado de Triaje Inteligente</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="uide-disclaimer">'
+        "⚠️ <b>Aviso Importante:</b> Este asistente virtual no reemplaza una consulta psicológica profesional. "
+        "Si te encuentras en una crisis grave o emergencia inmediata, por favor contacta a los servicios de emergencia de tu localidad "
+        "o acude al centro de salud más cercano."
+        "</div>",
+        unsafe_allow_html=True,
+    )
+
+    col1, col2 = st.columns([3, 2])
+
+    with col1:
+        with st.form("intake_form"):
+            st.subheader("📋 Registro de Ingreso Estudiantil")
+            st.caption("Por favor ingresa tus datos institucionales para comenzar.")
+
+            name = st.text_input("Nombre completo *", help="Ingresa tu nombre y apellido (solo letras).")
+            email = st.text_input("Correo institucional UIDE *", help="Debe terminar en @uide.edu.ec")
+            cedula = st.text_input("Cédula de Identidad Ecuatoriana *", help="Exactamente 10 dígitos numéricos válidos en Ecuador.")
+            consent = st.checkbox(
+                "Acepto que mis datos puedan ser compartidos de forma confidencial con Bienestar Estudiantil de la UIDE únicamente en caso de detectarse un riesgo crítico."
+            )
+            submitted = st.form_submit_button("Iniciar Conversación ➔", use_container_width=True)
+
+            if submitted:
+                errors = []
+
+                val_n_ok, val_n_msg = validar_nombre(name)
+                if not val_n_ok:
+                    errors.append(val_n_msg)
+
+                val_e_ok, val_e_msg = validar_email_uide(email)
+                if not val_e_ok:
+                    errors.append(val_e_msg)
+
+                val_c_ok, val_c_msg = validar_cedula_ecuador(cedula)
+                if not val_c_ok:
+                    errors.append(val_c_msg)
+
+                if not consent:
+                    errors.append("Debes aceptar el consentimiento para continuar.")
+
+                if errors:
+                    for err in errors:
+                        st.error(f"❌ {err}")
+                else:
+                    st.session_state.student_info = {
+                        "name": name.strip(),
+                        "email": email.strip().lower(),
+                        "cedula": cedula.strip(),
+                    }
+                    st.rerun()
+
+    with col2:
+        st.markdown("""
+        <div class="uide-card">
+            <h3 style="color: #800020; font-family: 'Outfit'; margin-top:0;">🛡️ Privacidad y Seguridad UIDE</h3>
+            <ul style="font-size: 14px; line-height: 1.8; color: #2D3748; padding-left: 20px;">
+                <li><b>Validación Módulo 10:</b> Verificación automatizada de cédulas ecuatorianas de 10 dígitos.</li>
+                <li><b>Historial Aislado:</b> Solo tú puedes ver tus conversaciones guardadas.</li>
+                <li><b>Atención Personalizada:</b> El asistente te escuchará y orientará en un espacio seguro.</li>
+                <li><b>Soporte Prioritario:</b> Bienestar Estudiantil UIDE recibe alertas únicamente en caso de emergencia clínica.</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
+
 def render_admin_login_gate():
     """Pantalla de inicio de sesión protegida para Administradores de Bienestar UIDE."""
     st.markdown("""
