@@ -80,7 +80,7 @@ st.markdown("""
         border-right: 1.5px solid #E2E8F0 !important;
     }
 
-    [data-testid="stSidebar"] p, [data-testid="stSidebar"] span, [data-testid="stSidebar"] label, [data-testid="stSidebar"] div {
+    [data-testid="stSidebar"] p, [data-testid="stSidebar"] span, [data-testid="stSidebar"] label {
         color: #2D3748 !important;
     }
 
@@ -97,23 +97,34 @@ st.markdown("""
         box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.15) !important;
     }
 
-    /* Botones primarios UIDE */
-    .stButton > button {
+    /* Botones primarios UIDE con texto Mostaza UIDE (#E5A823) visible y en negrita */
+    .stButton > button,
+    .stButton > button *,
+    div[data-testid="stFormSubmitButton"] > button,
+    div[data-testid="stFormSubmitButton"] > button *,
+    [data-testid="stSidebar"] .stButton > button,
+    [data-testid="stSidebar"] .stButton > button * {
         background-color: #800020 !important;
         color: #E5A823 !important;
         border-radius: 8px !important;
         border: none !important;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
         font-size: 14px !important;
         padding: 8px 18px !important;
         transition: all 0.2s ease-in-out !important;
     }
 
-    .stButton > button:hover {
+    .stButton > button:hover,
+    .stButton > button:hover *,
+    div[data-testid="stFormSubmitButton"] > button:hover,
+    div[data-testid="stFormSubmitButton"] > button:hover *,
+    [data-testid="stSidebar"] .stButton > button:hover,
+    [data-testid="stSidebar"] .stButton > button:hover * {
         background-color: #5c0017 !important;
         box-shadow: 0 4px 12px rgba(128, 0, 32, 0.25) !important;
-        color: #E5A823 !important;
+        color: #FFD700 !important;
     }
+
 
     /* Barra de entrada del Chat */
     [data-testid="stChatInput"] {
