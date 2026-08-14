@@ -174,7 +174,7 @@ st.markdown("""
 
     /* Banner Principal UIDE */
     .uide-header-banner {
-        background: linear-gradient(135deg, #800020 0%, #5c0017 60%, #1A365D 100%);
+        background: linear-gradient(135deg, #FFC627 0%, #E5A823 60%, #1A365D 100%);
         padding: 24px 28px;
         border-radius: 14px;
         margin-bottom: 24px;
