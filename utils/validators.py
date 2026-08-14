@@ -1,6 +1,14 @@
 import re
 from typing import Tuple
 
+__all__ = [
+    "validar_cedula_ecuador",
+    "validar_email_uide",
+    "validar_nombre",
+    "validar_mensaje_chat",
+]
+
+
 
 def validar_cedula_ecuador(cedula: str) -> Tuple[bool, str]:
     """

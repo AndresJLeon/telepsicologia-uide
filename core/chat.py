@@ -6,10 +6,24 @@ from openai import OpenAI
 
 from dotenv import load_dotenv
 
+import re
 from config.prompt import PROMPT_TELEPSICOLOGIA
 from core.rag_engine import RAGEngine
 from core.triage import TriageEngine
-from utils.validators import validar_mensaje_chat
+
+try:
+    from utils.validators import validar_mensaje_chat
+except ImportError:
+    def validar_mensaje_chat(mensaje: str):
+        if not mensaje or not str(mensaje).strip():
+            return False, "Por favor escribe un mensaje."
+        msg = str(mensaje).strip()
+        if msg.isdigit():
+            return False, "El chat no acepta entradas compuestas únicamente por números."
+        if not re.search(r"[a-zA-ZáéíóúÁÉÍÓÚñÑ]", msg):
+            return False, "Por favor ingresa un mensaje descriptivo en texto."
+        return True, "Mensaje válido."
+
 
 
 class ChatHandler:

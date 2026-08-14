@@ -15,7 +15,25 @@ from core.alert_log import CrisisAlertLog
 from core.conversation_manager import ConversationManager
 from utils.data_loader import load_csv, load_multiple_csvs, validate_csv, chunk_dataframe
 from utils.pdf_loader import PDFLoader
-from utils.validators import validar_cedula_ecuador, validar_email_uide, validar_nombre, validar_mensaje_chat
+try:
+    from utils.validators import (
+        validar_cedula_ecuador,
+        validar_email_uide,
+        validar_nombre,
+        validar_mensaje_chat,
+    )
+except ImportError:
+    from utils.validators import validar_cedula_ecuador, validar_email_uide, validar_nombre
+    def validar_mensaje_chat(mensaje: str):
+        if not mensaje or not str(mensaje).strip():
+            return False, "Por favor escribe un mensaje."
+        msg = str(mensaje).strip()
+        if msg.isdigit():
+            return False, "El chat no acepta entradas compuestas únicamente por números. Por favor describe lo que sientes con texto."
+        if not re.search(r"[a-zA-ZáéíóúÁÉÍÓÚñÑ]", msg):
+            return False, "Por favor ingresa un mensaje descriptivo en texto sobre cómo te sientes."
+        return True, "Mensaje válido."
+
 
 from config.prompt import TRIAGE_LEVELS
 
