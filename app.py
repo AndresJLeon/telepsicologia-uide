@@ -183,23 +183,28 @@ st.markdown("""
     }
 
     .uide-header-banner h1,
-    div.uide-header-banner > h1 {
+    div.uide-header-banner > h1,
+    .stMarkdown .uide-header-banner h1,
+    div[data-testid="stMarkdownContainer"] .uide-header-banner h1 {
         font-family: 'Outfit', sans-serif !important;
-        color: #FFFFFF !important;
+        color: #E5A823 !important;
         font-size: 28px !important;
         font-weight: 700 !important;
         margin: 0 0 6px 0 !important;
-        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5) !important;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;
     }
 
     .uide-header-banner p,
-    div.uide-header-banner > p {
-        color: #FFD700 !important;
+    div.uide-header-banner > p,
+    .stMarkdown .uide-header-banner p,
+    div[data-testid="stMarkdownContainer"] .uide-header-banner p {
+        color: #FFFFFF !important;
         font-size: 15px !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         margin: 0 !important;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
     }
+
 
 
     /* Disclaimer box */
@@ -343,9 +348,10 @@ def render_intake_gate():
     """Formulario de registro del estudiante con validaciones estrictas y algoritmo Módulo 10 de Cédula Ecuatoriana."""
     st.markdown("""
     <div class="uide-header-banner">
-        <h1>🧠 Telepsicología UIDE - Orientación en Salud Mental</h1>
-        <p>Universidad Internacional del Ecuador | Sistema Integrado de Triaje Inteligente</p>
+        <h1 style="color: #E5A823 !important; font-family: Outfit, sans-serif !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;">🧠 Telepsicología UIDE - Orientación en Salud Mental</h1>
+        <p style="color: #FFFFFF !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;">Universidad Internacional del Ecuador | Sistema Integrado de Triaje Inteligente</p>
     </div>
+
     """, unsafe_allow_html=True)
 
     st.markdown(
