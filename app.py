@@ -175,7 +175,6 @@ st.markdown("""
     /* Banner Principal UIDE */
     .uide-header-banner {
         background: linear-gradient(135deg, #800020 0%, #5c0017 60%, #1A365D 100%);
-        color: #E5A823 !important;
         padding: 24px 28px;
         border-radius: 14px;
         margin-bottom: 24px;
@@ -183,19 +182,25 @@ st.markdown("""
         border-bottom: 4px solid #E5A823;
     }
 
-    .uide-header-banner h1 {
+    .uide-header-banner h1,
+    div.uide-header-banner > h1 {
         font-family: 'Outfit', sans-serif !important;
-        color: #E5A823 !important;
+        color: #FFFFFF !important;
         font-size: 28px !important;
         font-weight: 700 !important;
         margin: 0 0 6px 0 !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5) !important;
     }
 
-    .uide-header-banner p {
-        color: #E5A823 !important;
+    .uide-header-banner p,
+    div.uide-header-banner > p {
+        color: #FFD700 !important;
         font-size: 15px !important;
+        font-weight: 600 !important;
         margin: 0 !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
     }
+
 
     /* Disclaimer box */
     .uide-disclaimer {
