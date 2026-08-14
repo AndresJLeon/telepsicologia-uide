@@ -47,15 +47,19 @@ st.set_page_config(
 )
 
 # --- ESTILOS CSS CON ALTO CONTRASTE Y PALETA INSTITUCIONAL UIDE (BORGOÑA, MOSTAZA Y AZUL NAVY) ---
+# --- ESTILOS CSS CON ALTO CONTRASTE, RESPONSIVIDAD MÓVIL Y PALETA INSTITUCIONAL UIDE (BORGOÑA, MOSTAZA Y AZUL NAVY) ---
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 
-    /* Forzar fondo claro global y tipografía de alto contraste */
+    /* Forzar fondo claro global, prevent de scrollbar horizontal y tipografía de alto contraste */
     html, body, [data-testid="stAppViewContainer"], .stApp {
         font-family: 'Inter', sans-serif !important;
         background-color: #F4F6F9 !important;
         color: #1A202C !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
     }
 
     [data-testid="stHeader"] {
@@ -72,7 +76,6 @@ st.markdown("""
         font-family: 'Outfit', sans-serif !important;
         font-weight: 700 !important;
     }
-
 
     p, span, label, div, li, td, th {
         color: #2D3748 !important;
@@ -101,7 +104,7 @@ st.markdown("""
         box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.15) !important;
     }
 
-    /* Botones primarios UIDE - Mantener tamaño original de Streamlit */
+    /* Botones primarios UIDE */
     .stButton > button,
     div[data-testid="stFormSubmitButton"] > button {
         background-color: #800020 !important;
@@ -109,6 +112,7 @@ st.markdown("""
         border-radius: 8px !important;
         border: none !important;
         font-weight: 700 !important;
+        min-height: 42px !important;
         transition: all 0.2s ease-in-out !important;
     }
 
@@ -145,8 +149,6 @@ st.markdown("""
         color: #FFD700 !important;
     }
 
-
-
     /* Barra de entrada del Chat */
     [data-testid="stChatInput"] {
         background-color: #FFFFFF !important;
@@ -176,7 +178,7 @@ st.markdown("""
         line-height: 1.6 !important;
     }
 
-    /* Banner Principal UIDE */
+    /* Banner Principal UIDE - Fluido y Responsivo */
     .uide-header-banner {
         background: linear-gradient(135deg, #800020 0%, #5c0017 60%, #1A365D 100%);
         padding: 24px 28px;
@@ -184,6 +186,8 @@ st.markdown("""
         margin-bottom: 24px;
         box-shadow: 0 8px 22px rgba(128, 0, 32, 0.2);
         border-bottom: 4px solid #E5A823;
+        box-sizing: border-box !important;
+        width: 100% !important;
     }
 
     .uide-banner-title,
@@ -195,27 +199,25 @@ st.markdown("""
     div[data-testid="stMarkdownContainer"] .uide-header-banner h1 {
         font-family: 'Outfit', sans-serif !important;
         color: #E5A823 !important;
-        font-size: 28px !important;
+        font-size: clamp(20px, 4vw, 28px) !important;
         font-weight: 700 !important;
         margin: 0 0 6px 0 !important;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
-        line-height: 1.2 !important;
+        line-height: 1.25 !important;
+        word-break: break-word !important;
     }
-
 
     .uide-header-banner p,
     div.uide-header-banner > p,
     .stMarkdown .uide-header-banner p,
     div[data-testid="stMarkdownContainer"] .uide-header-banner p {
         color: #FFFFFF !important;
-        font-size: 15px !important;
+        font-size: clamp(13px, 2.5vw, 15px) !important;
         font-weight: 500 !important;
         margin: 0 !important;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+        line-height: 1.4 !important;
     }
-
-
-
 
     /* Disclaimer box */
     .uide-disclaimer {
@@ -227,6 +229,8 @@ st.markdown("""
         font-size: 14px;
         line-height: 1.6;
         margin-bottom: 22px;
+        box-sizing: border-box !important;
+        width: 100% !important;
     }
 
     .uide-disclaimer b, .uide-disclaimer span {
@@ -241,6 +245,7 @@ st.markdown("""
         border: 1px solid #E2E8F0;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         margin-bottom: 20px;
+        box-sizing: border-box !important;
     }
 
     /* Pestañas (Tabs) */
@@ -266,7 +271,6 @@ st.markdown("""
         color: #E5A823 !important;
     }
 
-
     /* Estado animado del Bot */
     .bot-status-container {
         display: flex;
@@ -280,6 +284,79 @@ st.markdown("""
         font-size: 14px;
         font-weight: 500;
         margin-bottom: 14px;
+    }
+
+    /* --- REGLAS DE RESPONSIVIDAD PARA DISPOSITIVOS MÓVILES (SMARTPHONES Y TABLETS) --- */
+    @media screen and (max-width: 768px) {
+        [data-testid="stAppViewContainer"] > .main {
+            padding: 1rem 0.5rem !important;
+        }
+
+        .uide-header-banner {
+            padding: 16px 14px !important;
+            margin-bottom: 16px !important;
+            border-radius: 10px !important;
+        }
+
+        .uide-disclaimer {
+            padding: 12px 14px !important;
+            font-size: 13px !important;
+            margin-bottom: 16px !important;
+        }
+
+        .uide-card {
+            padding: 14px !important;
+            margin-bottom: 14px !important;
+        }
+
+        [data-testid="stChatMessage"] {
+            padding: 12px 14px !important;
+            margin-bottom: 8px !important;
+            border-radius: 10px !important;
+        }
+
+        [data-testid="stChatMessage"] p, 
+        [data-testid="stChatMessage"] span, 
+        [data-testid="stChatMessage"] div {
+            font-size: 14px !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Pestañas del Panel de Administración desplazables en móvil */
+        .stTabs [data-baseweb="tab-list"] {
+            overflow-x: auto !important;
+            flex-wrap: nowrap !important;
+            white-space: nowrap !important;
+            gap: 4px !important;
+            padding-bottom: 4px !important;
+            -webkit-overflow-scrolling: touch !important;
+        }
+
+        .stTabs [data-baseweb="tab"] {
+            height: 38px !important;
+            padding: 0 10px !important;
+            font-size: 13px !important;
+            flex-shrink: 0 !important;
+        }
+
+        /* Botones táctiles optimizados */
+        .stButton > button,
+        div[data-testid="stFormSubmitButton"] > button {
+            min-height: 44px !important;
+            font-size: 14px !important;
+        }
+
+        .bot-status-container {
+            padding: 10px 12px !important;
+            font-size: 13px !important;
+            flex-wrap: wrap !important;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .uide-header-banner {
+            padding: 12px 12px !important;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -355,15 +432,12 @@ def auto_save_current_conversation():
 
 
 def render_intake_gate():
-    """Formulario de registro del estudiante con validaciones estrictas y algoritmo Módulo 10 de Cédula Ecuatoriana."""
+    """Formulario de registro del estudiante con validaciones strictly y algoritmo Módulo 10 de Cédula Ecuatoriana."""
     st.markdown("""
     <div class="uide-header-banner">
-        <div class="uide-banner-title" style="color: #E5A823 !important; font-family: 'Outfit', sans-serif !important; font-size: 28px !important; font-weight: 700 !important; margin: 0 0 6px 0 !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;">🧠 Telepsicología UIDE - Orientación en Salud Mental</div>
-        <p style="color: #FFFFFF !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;">Universidad Internacional del Ecuador | Sistema Integrado de Triaje Inteligente</p>
+        <div class="uide-banner-title">🧠 Telepsicología UIDE - Orientación en Salud Mental</div>
+        <p>Universidad Internacional del Ecuador | Sistema Integrado de Triaje Inteligente</p>
     </div>
-
-
-
     """, unsafe_allow_html=True)
 
     st.markdown(
@@ -585,11 +659,9 @@ def render_student_chat():
 
     st.markdown("""
     <div class="uide-header-banner">
-        <div class="uide-banner-title" style="color: #E5A823 !important; font-family: 'Outfit', sans-serif !important; font-size: 28px !important; font-weight: 700 !important; margin: 0 0 6px 0 !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;">💬 Orientación Psicológica UIDE</div>
-        <p style="color: #FFFFFF !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;">Habla con nuestro asistente virtual sobre lo que sientes. Tu bienestar es nuestra prioridad.</p>
+        <div class="uide-banner-title">💬 Orientación Psicológica UIDE</div>
+        <p>Habla con nuestro asistente virtual sobre lo que sientes. Tu bienestar es nuestra prioridad.</p>
     </div>
-
-
     """, unsafe_allow_html=True)
 
     st.markdown(
