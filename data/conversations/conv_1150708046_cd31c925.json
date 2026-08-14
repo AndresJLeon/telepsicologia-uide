@@ -1,0 +1,59 @@
+{
+  "session_id": "cd31c925",
+  "created_at": "2026-08-13T19:11:43.385682",
+  "updated_at": "2026-08-13T19:14:49.088309",
+  "student_info": {
+    "name": "jose andres",
+    "email": "esquizhpeon@uide.edu.ec",
+    "cedula": "1150708046"
+  },
+  "triage_summary": {
+    "current_level": "BAJO",
+    "level_info": {
+      "color": "#4CAF50",
+      "icon": "🟢",
+      "description": "Malestar leve, sin riesgo aparente",
+      "recommendation": "Autocuidado y agendar una consulta psicológica programada."
+    },
+    "messages_analyzed": 3,
+    "scores": {
+      "BAJO": 0,
+      "MEDIO": 0,
+      "ALTO": 0,
+      "CRITICO": 0
+    }
+  },
+  "total_messages": 6,
+  "messages": [
+    {
+      "role": "user",
+      "content": "me siento genial no tengo clases hoy"
+    },
+    {
+      "role": "assistant",
+      "content": "¡Qué alegría escuchar eso! Se nota esa energía positiva en tu mensaje, y la verdad es que un día libre con esa actitud es un combo perfecto. \n\nAprovecha ese tiempo para ti, que también es importante. ¿Tienes algún plan para disfrutar el día, o vas a dejarlo fluir y ver qué pasa? Sea lo que sea, me alegra mucho que estés en ese estado.",
+      "triage_level": "BAJO",
+      "source_type": "RAG"
+    },
+    {
+      "role": "user",
+      "content": "no tengo plan para hoy"
+    },
+    {
+      "role": "assistant",
+      "content": "¡Y eso está perfecto! A veces los mejores días son justamente los que no tienen agenda, esos en los que el tiempo es todo tuyo y puedes hacer lo que te nazca en el momento. \n\nNo hay ninguna presión por tener un plan. De hecho, darte permiso para no hacer nada también es una forma de autocuidado, sobre todo si has estado con mucho estrés o carreras. \n\n¿Qué te apetece hacer ahora mismo con ese tiempo libre? ¿Algo tranquilo como ver una serie, o quizás salir a caminar un rato? Cuéntame, que me da curiosidad.",
+      "triage_level": "BAJO",
+      "source_type": "RAG"
+    },
+    {
+      "role": "user",
+      "content": "no tengo planes porq a veces me siento solo y me deprimo en las noches"
+    },
+    {
+      "role": "assistant",
+      "content": "Gracias por compartir eso conmigo, de verdad. Se necesita valor para poner en palabras eso que duele, y quiero que sepas que lo que sientes es completamente válido. Esas noches en las que la casa se siente más grande y los pensamientos pesan más, son duras, y no tienes que enfrentarlas con una sonrisa falsa ni mucho menos sentir que \"deberías\" estar bien solo porque no tienes clases.\n\nEse sentimiento de soledad, especialmente cuando cae la noche y baja el ruido del día, es algo que muchas personas atraviesan, aunque no siempre lo digan. No estás fallando por sentirte así, ni eres \"raro\" por ello. Es una emoción que viene y va, y que a veces se intensifica cuando no tenemos una distracción o un plan.\n\nQuiero preguntarte algo con mucho cariño, y solo si te sientes con ganas de responder: **cuando llega esa sensación de soledad o tristeza en la noche, ¿qué es lo que sueles hacer en ese momento?** ¿Hay algo que te ayude a calmarte un poquito, aunque sea distraerte con música, ver algo o escribir? \n\nNo hay prisa, aquí estoy para escucharte. Y recuerda que esto es un espacio de apoyo, pero si en algún momento sientes que la tristeza se vuelve muy pesada o te sobrepasa, siempre está Bienestar Estudiantil de la UIDE para acompañarte con profesionales que pueden darte un apoyo más profundo. Pero por ahora, sigamos conversando a tu ritmo.",
+      "triage_level": "BAJO",
+      "source_type": "RAG"
+    }
+  ]
+}

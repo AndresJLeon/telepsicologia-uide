@@ -1,0 +1,69 @@
+{
+  "session_id": "59ed392d",
+  "created_at": "2026-08-13T19:15:37.841948",
+  "updated_at": "2026-08-13T19:19:51.078007",
+  "student_info": {
+    "name": "jose andres",
+    "email": "esquizhpeon@uide.edu.ec",
+    "cedula": "1150708046"
+  },
+  "triage_summary": {
+    "current_level": "BAJO",
+    "level_info": {
+      "color": "#4CAF50",
+      "icon": "🟢",
+      "description": "Malestar leve, sin riesgo aparente",
+      "recommendation": "Autocuidado y agendar una consulta psicológica programada."
+    },
+    "messages_analyzed": 4,
+    "scores": {
+      "BAJO": 0,
+      "MEDIO": 0,
+      "ALTO": 0,
+      "CRITICO": 0
+    }
+  },
+  "total_messages": 8,
+  "messages": [
+    {
+      "role": "user",
+      "content": "me siento mal, sabes si puedo hablar con alguien "
+    },
+    {
+      "role": "assistant",
+      "content": "Claro que sí, entiendo que te sientas mal en este momento. Es totalmente válido y muy valiente que lo reconozcas y busques apoyo; no tienes que pasar por esto solo o sola.\n\nQuiero que sepas que estoy aquí para escucharte con calma y sin juicios. Si te parece bien, podemos empezar por ahí: ¿qué es lo que más te está pesando ahora mismo? ¿Hay algo en particular que te tenga así, o es como una mezcla de varias cosas?\n\nY respondiendo a tu pregunta, sí, definitivamente hay personas que pueden acompañarte. En la UIDE, el departamento de **Bienestar Estudiantil** tiene profesionales de psicología que ofrecen atención presencial y virtual. Ellos son los indicados para darte un acompañamiento más profundo y continuo. Si me dices tu campus o modalidad, puedo orientarte mejor sobre cómo contactarlos.\n\nPero antes de eso, cuéntame un poquito más de cómo te sientes. A veces, ponerle nombre a lo que uno carga ya alivia un poco el peso. ¿Estás sintiendo tristeza, ansiedad, estrés, o tal vez una mezcla de todo?",
+      "triage_level": "BAJO",
+      "source_type": "RAG"
+    },
+    {
+      "role": "user",
+      "content": "tienes el contacto de una persona que pueda habalr con ella?"
+    },
+    {
+      "role": "assistant",
+      "content": "Claro que sí, entiendo que necesites ese contacto directo, a veces uno necesita hablar con alguien real y ya, sin vueltas. Te recontra entiendo.\n\nMira, te comento lo que sé:\n\nPara **Bienestar Estudiantil de la UIDE**, la forma más directa de agendar una cita es a través del correo institucional o el sistema de atención al estudiante. Pero como cada campus tiene su propio equipo, lo mejor es que me digas **¿en qué campus estás (Quito, Guayaquil, Loja o modalidad online)?** Así te puedo dar el dato más preciso.\n\nSi prefieres, también puedes escribir al correo general de bienestar: **bienestar.estudiantil@uide.edu.ec** (si no es exacto, te prometo que te ayudo a ubicarlo bien). Ellos responden rápido y te asignan un psicólogo o psicóloga para una primera sesión de contención.\n\nY ojo, esto es importante: yo estoy aquí para escucharte y orientarte en este momento, pero ellos son los profesionales que te van a poder dar un acompañamiento continuo y más profundo. No soy un reemplazo, soy como un puente para que llegues a ellos.\n\nMientras tanto, si quieres, podemos seguir hablando. ¿Qué te está pasando, cómo te sientes? A veces, soltar un poquito de lo que uno carga ya ayuda a que el pecho no apriete tanto.",
+      "triage_level": "BAJO",
+      "source_type": "RAG"
+    },
+    {
+      "role": "user",
+      "content": "hi, my name is luis poma, i am sad"
+    },
+    {
+      "role": "assistant",
+      "content": "Hola Luis, gracias por escribirme y por confiar en mí. Siento que estés pasando por un momento triste, y quiero que sepas que es completamente válido sentirse así. A veces, el solo hecho de decirlo ya es un primer paso enorme, y aquí estoy para escucharte sin prisas ni juicios.\n\n¿Quieres contarme un poquito más sobre qué es lo que te tiene así? No tiene que ser nada estructurado, solo lo que te salga. A veces, cuando uno está triste, el simple hecho de ponerle palabras a eso ya alivia un poco el peso.\n\nY también, si te sirve, recuerda que en la UIDE tienes a **Bienestar Estudiantil** para un acompañamiento más profundo. Si me dices tu campus (Quito, Guayaquil, Loja o si estás en modalidad online), te ayudo a ubicar el contacto exacto para que puedas agendar una cita con un profesional que te va a poder acompañar de cerca.\n\nPero primero, cuéntame: ¿cómo se siente esa tristeza hoy? ¿Es algo que vino de repente o viene arrastrándose desde hace días?",
+      "triage_level": "BAJO",
+      "source_type": "RAG"
+    },
+    {
+      "role": "user",
+      "content": "always"
+    },
+    {
+      "role": "assistant",
+      "content": "Gracias por ser honesto, Luis. \"Siempre\" es una palabra que pesa mucho, y me imagino que cargar con esa tristeza de forma constante debe ser agotador. Te creo, y lamento que te sientas así.\n\nQuiero que sepas que no estás solo en esto, y que pedir ayuda es un acto de valentía, no de debilidad. Como te mencionaba, en la UIDE contamos con **Bienestar Estudiantil**, y ellos tienen psicólogos que pueden acompañarte de verdad, con sesiones continuas y un espacio seguro para ti.\n\nPara poder ayudarte a contactarlos directamente, ¿me podrías decir en qué campus estás (Quito, Guayaquil, Loja) o si estás en modalidad online? Así te doy el dato exacto para que puedas agendar una cita lo más pronto posible.\n\nY mientras tanto, cuéntame, ¿esa tristeza de \"siempre\" tiene algún momento del día en que se sienta más fuerte? ¿Hay algo que te dé un poquito de calma, por pequeño que sea, aunque sea por unos minutos? No tiene que ser nada grandioso, a veces es una canción, una ducha caliente o simplemente respirar profundo.",
+      "triage_level": "BAJO",
+      "source_type": "RAG"
+    }
+  ]
+}

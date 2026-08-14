@@ -81,3 +81,25 @@ def validar_nombre(nombre: str) -> Tuple[bool, str]:
         return False, "El nombre debe tener al menos 3 caracteres."
 
     return True, "Nombre válido."
+
+
+def validar_mensaje_chat(mensaje: str) -> Tuple[bool, str]:
+    """
+    Valida el mensaje ingresado en el chat.
+    Rechaza entradas vacías, compuestas únicamente por números o carentes de texto alfabético.
+    """
+    if not mensaje or not str(mensaje).strip():
+        return False, "Por favor escribe un mensaje."
+
+    msg_limpio = str(mensaje).strip()
+
+    # Si es solo dígitos
+    if msg_limpio.isdigit():
+        return False, "El chat no acepta entradas compuestas únicamente por números. Por favor describe lo que sientes con texto."
+
+    # Si no contiene ninguna letra alfabética
+    if not re.search(r"[a-zA-ZáéíóúÁÉÍÓÚñÑ]", msg_limpio):
+        return False, "Por favor ingresa un mensaje descriptivo en texto sobre cómo te sientes."
+
+    return True, "Mensaje válido."
+

@@ -1,3 +1,4 @@
+import re
 from typing import Dict, List
 from config.prompt import TRIAGE_KEYWORDS, TRIAGE_LEVELS
 
@@ -14,7 +15,14 @@ class TriageEngine:
 
     def analyze_message(self, user_message: str) -> str:
         """Analyze a user message and return the detected urgency level."""
+        clean_msg = str(user_message).strip()
+
+        # Omitir análisis si el mensaje es solo números o carece de texto alfabético
+        if clean_msg.isdigit() or not re.search(r"[a-zA-ZáéíóúÁÉÍÓÚñÑ]", clean_msg):
+            return self.current_level
+
         message_lower = user_message.lower()
+
 
         for level in ["CRITICO", "ALTO", "MEDIO", "BAJO"]:
             for keyword in TRIAGE_KEYWORDS[level]:

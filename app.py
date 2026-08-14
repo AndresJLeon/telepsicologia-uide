@@ -15,7 +15,8 @@ from core.alert_log import CrisisAlertLog
 from core.conversation_manager import ConversationManager
 from utils.data_loader import load_csv, load_multiple_csvs, validate_csv, chunk_dataframe
 from utils.pdf_loader import PDFLoader
-from utils.validators import validar_cedula_ecuador, validar_email_uide, validar_nombre
+from utils.validators import validar_cedula_ecuador, validar_email_uide, validar_nombre, validar_mensaje_chat
+
 from config.prompt import TRIAGE_LEVELS
 
 
@@ -81,7 +82,7 @@ st.markdown("""
     /* Botones primarios UIDE */
     .stButton > button {
         background-color: #800020 !important;
-        color: #FFFFFF !important;
+        color: #E5A823 !important;
         border-radius: 8px !important;
         border: none !important;
         font-weight: 600 !important;
@@ -93,7 +94,7 @@ st.markdown("""
     .stButton > button:hover {
         background-color: #5c0017 !important;
         box-shadow: 0 4px 12px rgba(128, 0, 32, 0.25) !important;
-        color: #FFFFFF !important;
+        color: #E5A823 !important;
     }
 
     /* Barra de entrada del Chat */
@@ -128,7 +129,7 @@ st.markdown("""
     /* Banner Principal UIDE */
     .uide-header-banner {
         background: linear-gradient(135deg, #800020 0%, #5c0017 60%, #1A365D 100%);
-        color: #FFFFFF !important;
+        color: #E5A823 !important;
         padding: 24px 28px;
         border-radius: 14px;
         margin-bottom: 24px;
@@ -138,14 +139,14 @@ st.markdown("""
 
     .uide-header-banner h1 {
         font-family: 'Outfit', sans-serif !important;
-        color: #FFFFFF !important;
+        color: #E5A823 !important;
         font-size: 28px !important;
         font-weight: 700 !important;
         margin: 0 0 6px 0 !important;
     }
 
     .uide-header-banner p {
-        color: #F7FAFC !important;
+        color: #E5A823 !important;
         font-size: 15px !important;
         margin: 0 !important;
     }
@@ -192,12 +193,13 @@ st.markdown("""
 
     .stTabs [aria-selected="true"] {
         background-color: #800020 !important;
-        color: #FFFFFF !important;
+        color: #E5A823 !important;
     }
 
     .stTabs [aria-selected="true"] p, .stTabs [aria-selected="true"] span {
-        color: #FFFFFF !important;
+        color: #E5A823 !important;
     }
+
 
     /* Estado animado del Bot */
     .bot-status-container {
@@ -314,8 +316,18 @@ def render_intake_gate():
             name = st.text_input("Nombre completo *", help="Ingresa tu nombre y apellido (solo letras).")
             email = st.text_input("Correo institucional UIDE *", help="Debe terminar en @uide.edu.ec")
             cedula = st.text_input("Cédula de Identidad Ecuatoriana *", help="Exactamente 10 dígitos numéricos válidos en Ecuador.")
+
+            with st.expander("📄 Política de Tratamiento de Datos Personales (LOPDP Ecuador)", expanded=False):
+                st.markdown("""
+                <div style="font-size: 13px; color: #2D3748; line-height: 1.6;">
+                <b>Tratamiento de Datos Personales:</b> De conformidad con la Ley Orgánica de Protección de Datos Personales de Ecuador (LOPDP), la Universidad Internacional del Ecuador (UIDE) informa que sus datos identificativos (nombre, correo institucional y cédula) y las interacciones realizadas en esta plataforma serán tratadas de manera estrictamente confidencial.<br><br>
+                <b>Finalidad:</b> Orientación emocional psicoeducativa primaria, registro de sesión y acompañamiento seguro para el bienestar estudiantil.<br><br>
+                <b>Derechos ARCO:</b> Usted puede ejercer sus derechos de acceso, rectificación, cancelación y oposición de acuerdo a la normativa vigente.
+                </div>
+                """, unsafe_allow_html=True)
+
             consent = st.checkbox(
-                "Acepto que mis datos puedan ser compartidos de forma confidencial con Bienestar Estudiantil de la UIDE únicamente en caso de detectarse un riesgo crítico."
+                "He leído y acepto la política de tratamiento de datos personales y términos de confidencialidad UIDE."
             )
             submitted = st.form_submit_button("Iniciar Conversación ➔", use_container_width=True)
 
@@ -335,7 +347,8 @@ def render_intake_gate():
                     errors.append(val_c_msg)
 
                 if not consent:
-                    errors.append("Debes aceptar el consentimiento para continuar.")
+                    errors.append("Debes aceptar la política de tratamiento de datos personales para continuar.")
+
 
                 if errors:
                     for err in errors:
@@ -356,10 +369,11 @@ def render_intake_gate():
                 <li><b>Validación Módulo 10:</b> Verificación automatizada de cédulas ecuatorianas de 10 dígitos.</li>
                 <li><b>Historial Aislado:</b> Solo tú puedes ver tus conversaciones guardadas.</li>
                 <li><b>Atención Personalizada:</b> El asistente te escuchará y orientará en un espacio seguro.</li>
-                <li><b>Soporte Prioritario:</b> Bienestar Estudiantil UIDE recibe alertas únicamente en caso de emergencia clínica.</li>
+                <li><b>Confidencialidad Garantizada:</b> Tu espacio de conversación es privado, seguro y libre de juicios.</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
+
 
 
 def render_admin_login_gate():
@@ -428,18 +442,26 @@ def render_student_sidebar():
             if user_convs:
                 st.caption(f"Tienes {len(user_convs)} conversación(es) guardada(s):")
                 for c in user_convs[:6]:
-                    label = f"💬 {c['updated_at'][:16]} ({c['total_messages']} msgs)"
+                    is_active = (c["session_id"] == st.session_state.get("session_id"))
+                    icon = "📌" if is_active else "💬"
+                    active_tag = " (Activa)" if is_active else ""
+                    label = f"{icon} {c['updated_at'][:16]} ({c['total_messages']} msgs){active_tag}"
+
                     if st.button(label, key=f"load_conv_{c['session_id']}", use_container_width=True):
                         full_conv = st.session_state.conv_manager.load_conversation(c["filepath"])
                         if full_conv and "messages" in full_conv:
                             st.session_state.session_id = c["session_id"]
                             st.session_state.messages = full_conv["messages"]
-                            if st.session_state.chat_handler:
-                                st.session_state.chat_handler.load_previous_messages(full_conv["messages"])
-                            st.success("Conversación cargada.")
+
+                            if st.session_state.chat_handler is None:
+                                st.session_state.chat_handler = get_chat_handler()
+
+                            st.session_state.chat_handler.load_previous_messages(full_conv["messages"])
+                            st.success("Conversación cargada. Puedes continuar chateando.")
                             st.rerun()
             else:
                 st.caption("Aún no tienes conversaciones previas guardadas.")
+
 
         st.divider()
 
@@ -453,6 +475,8 @@ def render_student_sidebar():
             st.rerun()
 
         st.divider()
+
+
 
         # Acceso discreto para administradores de Bienestar UIDE
         with st.expander("🔒 Acceso Administración UIDE", expanded=False):
@@ -484,16 +508,23 @@ def render_student_chat():
 
     st.markdown(
         '<div class="uide-disclaimer">'
-        "⚠️ <b>Aviso de Acompañamiento:</b> Este chat ofrece orientación inicial y escucha activa. "
-        "No genera diagnósticos médicos. Si estás en una situación de crisis grave, comunícate con emergencias o acude a Bienestar Estudiantil."
+        "⚠️ <b>Aviso de Acompañamiento y Exención Médica:</b> Este chat ofrece orientación emocional y acompañamiento psicoeducativo temporal. "
+        "<b>NO emite diagnósticos médicos ni psicológicos clínicos ni receta fármacos.</b> "
+        "Si requieres atención médica o te encuentras en una crisis grave, contacta inmediatamente al <b>911</b>, a la línea <b>171 Opción 6</b> o a Bienestar Estudiantil UIDE."
         "</div>",
         unsafe_allow_html=True,
     )
 
-    # Mostrar mensajes existentes en el chat (sin badges técnicos ni marcas molestas)
+    # Mostrar mensajes existentes en el chat con indicación de procedencia (RAG vs LLM)
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
+            if message["role"] == "assistant":
+                source = message.get("source_type")
+                if source == "RAG":
+                    st.caption("📚 *Respuesta respaldada con la Base de Conocimiento UIDE (RAG)*")
+                elif source == "LLM":
+                    st.caption("🤖 *Orientación generada por el Modelo LLM (DeepSeek AI)*")
 
     # Alerta sutil en caso de riesgo crítico
     if st.session_state.chat_handler and st.session_state.chat_handler.triage.current_level == "CRITICO":
@@ -501,76 +532,80 @@ def render_student_chat():
             "🚨 **Atención de Emergencia**: Si te sientes en peligro o necesitas ayuda inmediata, "
             "contacta al 911 o acude al centro de salud o urgencias más cercano."
         )
-        if st.session_state.crisis_alert_sent and st.session_state.crisis_alert_status:
-            status = st.session_state.crisis_alert_status
-            if status.get("sent"):
-                st.success("✅ El equipo de Bienestar Estudiantil de la UIDE ha sido notificado de forma confidencial para brindarte apoyo.")
 
-    # Input del usuario
+    # Input del usuario con validación estricta de texto
+
     if prompt := st.chat_input("Cuéntame cómo te sientes hoy..."):
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
+        val_ok, val_msg = validar_mensaje_chat(prompt)
+        if not val_ok:
+            st.warning(f"⚠️ {val_msg}")
+        else:
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            with st.chat_message("user"):
+                st.markdown(prompt)
 
-        with st.chat_message("assistant"):
-            status_box = st.empty()
+            with st.chat_message("assistant"):
+                status_box = st.empty()
 
-            def update_status(status_msg: str):
-                status_box.markdown(
-                    f'<div class="bot-status-container"><span>⏳</span> <b>Estado del Asistente:</b> {status_msg}</div>',
-                    unsafe_allow_html=True,
-                )
-
-            try:
-                # Transmisión con actualización de estados en vivo
-                response = st.write_stream(
-                    st.session_state.chat_handler.get_response_stream(
-                        prompt, status_callback=update_status
-                    )
-                )
-
-                # Limpiar la caja de estado al finalizar
-                status_box.empty()
-
-                triage_level = st.session_state.chat_handler.triage.current_level
-
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "content": response,
-                    "triage_level": triage_level,
-                })
-
-                # Guardado automático privado de la conversación
-                auto_save_current_conversation()
-
-                # Notificación automática únicamente si el triaje detecta nivel CRÍTICO
-                if triage_level == "CRITICO" and not st.session_state.crisis_alert_sent:
-                    smtp_config = dict(st.secrets.get("smtp", {}))
-                    notifier = CrisisNotifier(smtp_config)
-                    result = notifier.send_crisis_alert(
-                        student_info=st.session_state.student_info,
-                        triage_summary=st.session_state.chat_handler.get_triage_summary(),
-                        recent_messages=st.session_state.messages,
-                    )
-                    st.session_state.crisis_alert_sent = True
-                    st.session_state.crisis_alert_status = result
-
-                    CrisisAlertLog().record(
-                        student_info=st.session_state.student_info,
-                        triage_level=triage_level,
-                        email_result=result,
+                def update_status(status_msg: str):
+                    status_box.markdown(
+                        f'<div class="bot-status-container"><span>⏳</span> <b>Estado del Asistente:</b> {status_msg}</div>',
+                        unsafe_allow_html=True,
                     )
 
-                st.rerun()
+                try:
+                    # Transmisión con actualización de estados en vivo
+                    response = st.write_stream(
+                        st.session_state.chat_handler.get_response_stream(
+                            prompt, status_callback=update_status
+                        )
+                    )
 
-            except Exception as e:
-                status_box.empty()
-                st.error(f"Ocurrió un error al procesar tu mensaje: {str(e)}")
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "content": "Lo siento, tuve un problema de conexión. Por favor inténtalo nuevamente.",
-                })
-                auto_save_current_conversation()
+                    # Limpiar la caja de estado al finalizar
+                    status_box.empty()
+
+                    triage_level = st.session_state.chat_handler.triage.current_level
+                    source_type = "RAG" if getattr(st.session_state.chat_handler, "last_rag_used", False) else "LLM"
+
+                    st.session_state.messages.append({
+                        "role": "assistant",
+                        "content": response,
+                        "triage_level": triage_level,
+                        "source_type": source_type,
+                    })
+
+                    # Guardado automático privado de la conversación
+                    auto_save_current_conversation()
+
+                    # Notificación automática únicamente si el triaje detecta nivel CRÍTICO
+                    if triage_level == "CRITICO" and not st.session_state.crisis_alert_sent:
+                        smtp_config = dict(st.secrets.get("smtp", {}))
+                        notifier = CrisisNotifier(smtp_config)
+                        result = notifier.send_crisis_alert(
+                            student_info=st.session_state.student_info,
+                            triage_summary=st.session_state.chat_handler.get_triage_summary(),
+                            recent_messages=st.session_state.messages,
+                        )
+                        st.session_state.crisis_alert_sent = True
+                        st.session_state.crisis_alert_status = result
+
+                        CrisisAlertLog().record(
+                            student_info=st.session_state.student_info,
+                            triage_level=triage_level,
+                            email_result=result,
+                        )
+
+                    st.rerun()
+
+                except Exception as e:
+                    status_box.empty()
+                    st.error(f"Ocurrió un error al procesar tu mensaje: {str(e)}")
+                    st.session_state.messages.append({
+                        "role": "assistant",
+                        "content": "Lo siento, tuve un problema de conexión. Por favor inténtalo nuevamente.",
+                    })
+                    auto_save_current_conversation()
+
 
 
 def render_admin_panel():
@@ -640,7 +675,15 @@ def render_admin_panel():
                     st.subheader("Transcripción de la Conversación:")
                     for m in c.get("messages", []):
                         role_icon = "👤 Estudiante" if m["role"] == "user" else "🤖 Asistente"
-                        st.markdown(f"**{role_icon}:** {m['content']}")
+                        source_tag = ""
+                        if m["role"] == "assistant":
+                            src = m.get("source_type", "N/A")
+                            if src == "RAG":
+                                source_tag = " `[Fuente: Base de Conocimiento RAG]`"
+                            elif src == "LLM":
+                                source_tag = " `[Fuente: Modelo DeepSeek LLM]`"
+                        st.markdown(f"**{role_icon}{source_tag}:** {m['content']}")
+
 
     with tab2:
         st.subheader("Gestión e Indexación de Base de Conocimiento (CSVs / PDFs)")

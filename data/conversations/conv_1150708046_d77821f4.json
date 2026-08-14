@@ -1,0 +1,39 @@
+{
+  "session_id": "d77821f4",
+  "created_at": "2026-08-13T19:02:11.964261",
+  "updated_at": "2026-08-13T19:02:11.964261",
+  "student_info": {
+    "name": "jose andres",
+    "email": "esquizhpeon@uide.edu.ec",
+    "cedula": "1150708046"
+  },
+  "triage_summary": {
+    "current_level": "BAJO",
+    "level_info": {
+      "color": "#4CAF50",
+      "icon": "🟢",
+      "description": "Malestar leve, sin riesgo aparente",
+      "recommendation": "Autocuidado y agendar una consulta psicológica programada."
+    },
+    "messages_analyzed": 1,
+    "scores": {
+      "BAJO": 0,
+      "MEDIO": 0,
+      "ALTO": 0,
+      "CRITICO": 0
+    }
+  },
+  "total_messages": 2,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hola como estas"
+    },
+    {
+      "role": "assistant",
+      "content": "¡Hola! Qué gusto saber de ti. Estoy muy bien, gracias por preguntar, y aquí estoy, con toda la disposición para escucharte. \n\nCuéntame, ¿cómo te encuentras tú hoy? ¿Qué te trae por aquí? A veces solo hablar un poquito de cómo nos sentimos ya ayuda a aligerar la carga. Estoy aquí para lo que necesites.",
+      "triage_level": "BAJO",
+      "source_type": "RAG"
+    }
+  ]
+}
