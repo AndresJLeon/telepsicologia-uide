@@ -63,12 +63,16 @@ st.markdown("""
         border-bottom: 3px solid #E5A823 !important;
     }
 
-    /* Encabezados con color institucional Borgoña y tipografía Outfit */
-    h1, h2, h3, h4, h5, h6, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+    /* Encabezados con color institucional Borgoña y tipografía Outfit (excluyendo títulos del banner) */
+    h2, h3, h4, h5, h6, 
+    .stMarkdown h2, .stMarkdown h3,
+    .stMarkdown h1:not(.uide-title-mustaza),
+    h1:not(.uide-title-mustaza) {
         color: #800020 !important;
         font-family: 'Outfit', sans-serif !important;
         font-weight: 700 !important;
     }
+
 
     p, span, label, div, li, td, th {
         color: #2D3748 !important;
@@ -182,6 +186,7 @@ st.markdown("""
         border-bottom: 4px solid #E5A823;
     }
 
+    h1.uide-title-mustaza,
     .uide-header-banner h1,
     div.uide-header-banner > h1,
     .stMarkdown .uide-header-banner h1,
@@ -204,6 +209,7 @@ st.markdown("""
         margin: 0 !important;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
     }
+
 
 
 
@@ -348,9 +354,10 @@ def render_intake_gate():
     """Formulario de registro del estudiante con validaciones estrictas y algoritmo Módulo 10 de Cédula Ecuatoriana."""
     st.markdown("""
     <div class="uide-header-banner">
-        <h1 style="color: #E5A823 !important; font-family: Outfit, sans-serif !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;">🧠 Telepsicología UIDE - Orientación en Salud Mental</h1>
+        <h1 class="uide-title-mustaza" style="color: #E5A823 !important; font-family: Outfit, sans-serif !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;">🧠 Telepsicología UIDE - Orientación en Salud Mental</h1>
         <p style="color: #FFFFFF !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;">Universidad Internacional del Ecuador | Sistema Integrado de Triaje Inteligente</p>
     </div>
+
 
     """, unsafe_allow_html=True)
 
@@ -573,9 +580,10 @@ def render_student_chat():
 
     st.markdown("""
     <div class="uide-header-banner">
-        <h1>💬 Orientación Psicológica UIDE</h1>
-        <p>Habla con nuestro asistente virtual sobre lo que sientes. Tu bienestar es nuestra prioridad.</p>
+        <h1 class="uide-title-mustaza" style="color: #E5A823 !important; font-family: Outfit, sans-serif !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;">💬 Orientación Psicológica UIDE</h1>
+        <p style="color: #FFFFFF !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;">Habla con nuestro asistente virtual sobre lo que sientes. Tu bienestar es nuestra prioridad.</p>
     </div>
+
     """, unsafe_allow_html=True)
 
     st.markdown(
