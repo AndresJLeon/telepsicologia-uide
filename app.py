@@ -54,8 +54,8 @@ st.markdown("""
     /* Forzar fondo claro global y tipografía de alto contraste */
     html, body, [data-testid="stAppViewContainer"], .stApp {
         font-family: 'Inter', sans-serif !important;
-        background-color: #FFC627 !important;
-        color: #FFC627 !important;
+        background-color: #F4F6F9 !important;
+        color: #1A202C !important;
     }
 
     [data-testid="stHeader"] {
