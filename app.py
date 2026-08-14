@@ -407,19 +407,24 @@ def render_intake_gate():
                     }
                     st.rerun()
 
-    with col2:
-        st.markdown("""
-        <div class="uide-card">
-            <h3 style="color: #800020; font-family: 'Outfit'; margin-top:0;">🛡️ Privacidad y Seguridad UIDE</h3>
-            <ul style="font-size: 14px; line-height: 1.8; color: #2D3748; padding-left: 20px;">
-                <li><b>Validación Módulo 10:</b> Verificación automatizada de cédulas ecuatorianas de 10 dígitos.</li>
-                <li><b>Historial Aislado:</b> Solo tú puedes ver tus conversaciones guardadas.</li>
-                <li><b>Atención Personalizada:</b> El asistente te escuchará y orientará en un espacio seguro.</li>
-                <li><b>Confidencialidad Garantizada:</b> Tu espacio de conversación es privado, seguro y libre de juicios.</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
 
+    with col2:
+
+        if os.path.exists("salud_mental_uide.jpg"):
+            st.image("salud_mental_uide.jpg", use_container_width=True)
+            st.markdown("""
+            <div style="text-align: center; padding: 10px 0;">
+                <h3 style="color: #800020; font-family: 'Outfit'; margin: 0;">💜 Mente sana, vida plena</h3>
+                <p style="font-size: 14px; color: #4A5568; margin-top: 6px;">Tu bienestar emocional es nuestra prioridad. Habla en un espacio seguro, confidencial y diseñado para ti en la UIDE.</p>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.markdown("""
+            <div class="uide-card">
+                <h3 style="color: #800020; font-family: 'Outfit'; margin-top:0;">💜 Mente sana, vida plena</h3>
+                <p style="font-size: 14px; line-height: 1.8; color: #2D3748;">Tu bienestar emocional es nuestra prioridad. La UIDE te brinda un espacio seguro, confidencial y libre de juicios para orientarte en todo momento.</p>
+            </div>
+            """, unsafe_allow_html=True)
 
 
 def render_admin_login_gate():
@@ -491,7 +496,16 @@ def render_student_sidebar():
                     is_active = (c["session_id"] == st.session_state.get("session_id"))
                     icon = "📌" if is_active else "💬"
                     active_tag = " (Activa)" if is_active else ""
-                    label = f"{icon} {c['updated_at'][:16]} ({c['total_messages']} msgs){active_tag}"
+
+                    # Extraer el primer mensaje del estudiante para título descriptivo
+                    first_user_msg = next((m.get("content", "") for m in c.get("messages", []) if m.get("role") == "user"), "")
+                    clean_first_msg = " ".join(first_user_msg.split())
+                    if clean_first_msg:
+                        title_text = f'"{clean_first_msg[:24].strip()}..."' if len(clean_first_msg) > 24 else f'"{clean_first_msg}"'
+                    else:
+                        title_text = c['updated_at'][:16]
+
+                    label = f"{icon} {title_text} ({c['total_messages']} msgs){active_tag}"
 
                     if st.button(label, key=f"load_conv_{c['session_id']}", use_container_width=True):
                         full_conv = st.session_state.conv_manager.load_conversation(c["filepath"])
@@ -507,6 +521,7 @@ def render_student_sidebar():
                             st.rerun()
             else:
                 st.caption("Aún no tienes conversaciones previas guardadas.")
+
 
 
         st.divider()
