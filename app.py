@@ -186,6 +186,8 @@ st.markdown("""
         border-bottom: 4px solid #E5A823;
     }
 
+    .uide-banner-title,
+    .uide-header-banner .uide-banner-title,
     h1.uide-title-mustaza,
     .uide-header-banner h1,
     div.uide-header-banner > h1,
@@ -196,8 +198,10 @@ st.markdown("""
         font-size: 28px !important;
         font-weight: 700 !important;
         margin: 0 0 6px 0 !important;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+        line-height: 1.2 !important;
     }
+
 
     .uide-header-banner p,
     div.uide-header-banner > p,
@@ -354,9 +358,10 @@ def render_intake_gate():
     """Formulario de registro del estudiante con validaciones estrictas y algoritmo Módulo 10 de Cédula Ecuatoriana."""
     st.markdown("""
     <div class="uide-header-banner">
-        <h1 class="uide-title-mustaza" style="color: #E5A823 !important; font-family: Outfit, sans-serif !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;">🧠 Telepsicología UIDE - Orientación en Salud Mental</h1>
+        <div class="uide-banner-title" style="color: #E5A823 !important; font-family: 'Outfit', sans-serif !important; font-size: 28px !important; font-weight: 700 !important; margin: 0 0 6px 0 !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;">🧠 Telepsicología UIDE - Orientación en Salud Mental</div>
         <p style="color: #FFFFFF !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;">Universidad Internacional del Ecuador | Sistema Integrado de Triaje Inteligente</p>
     </div>
+
 
 
     """, unsafe_allow_html=True)
@@ -580,9 +585,10 @@ def render_student_chat():
 
     st.markdown("""
     <div class="uide-header-banner">
-        <h1 class="uide-title-mustaza" style="color: #E5A823 !important; font-family: Outfit, sans-serif !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;">💬 Orientación Psicológica UIDE</h1>
+        <div class="uide-banner-title" style="color: #E5A823 !important; font-family: 'Outfit', sans-serif !important; font-size: 28px !important; font-weight: 700 !important; margin: 0 0 6px 0 !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;">💬 Orientación Psicológica UIDE</div>
         <p style="color: #FFFFFF !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;">Habla con nuestro asistente virtual sobre lo que sientes. Tu bienestar es nuestra prioridad.</p>
     </div>
+
 
     """, unsafe_allow_html=True)
 
