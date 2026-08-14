@@ -97,33 +97,50 @@ st.markdown("""
         box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.15) !important;
     }
 
-    /* Botones primarios UIDE con texto Mostaza UIDE (#E5A823) visible y en negrita */
+    /* Botones primarios UIDE - Mantener tamaño original de Streamlit */
     .stButton > button,
-    .stButton > button *,
-    div[data-testid="stFormSubmitButton"] > button,
-    div[data-testid="stFormSubmitButton"] > button *,
-    [data-testid="stSidebar"] .stButton > button,
-    [data-testid="stSidebar"] .stButton > button * {
+    div[data-testid="stFormSubmitButton"] > button {
         background-color: #800020 !important;
         color: #E5A823 !important;
         border-radius: 8px !important;
         border: none !important;
         font-weight: 700 !important;
-        font-size: 14px !important;
-        padding: 8px 18px !important;
         transition: all 0.2s ease-in-out !important;
     }
 
+    /* Cambiar SOLO el color del texto de los hijos sin alterar tamaños ni padding */
+    .stButton > button p,
+    .stButton > button span,
+    .stButton > button div,
+    div[data-testid="stFormSubmitButton"] > button p,
+    div[data-testid="stFormSubmitButton"] > button span,
+    div[data-testid="stFormSubmitButton"] > button div,
+    [data-testid="stSidebar"] .stButton > button p,
+    [data-testid="stSidebar"] .stButton > button span,
+    [data-testid="stSidebar"] .stButton > button div {
+        color: #E5A823 !important;
+        font-weight: 700 !important;
+    }
+
     .stButton > button:hover,
-    .stButton > button:hover *,
-    div[data-testid="stFormSubmitButton"] > button:hover,
-    div[data-testid="stFormSubmitButton"] > button:hover *,
-    [data-testid="stSidebar"] .stButton > button:hover,
-    [data-testid="stSidebar"] .stButton > button:hover * {
+    div[data-testid="stFormSubmitButton"] > button:hover {
         background-color: #5c0017 !important;
         box-shadow: 0 4px 12px rgba(128, 0, 32, 0.25) !important;
         color: #FFD700 !important;
     }
+
+    .stButton > button:hover p,
+    .stButton > button:hover span,
+    .stButton > button:hover div,
+    div[data-testid="stFormSubmitButton"] > button:hover p,
+    div[data-testid="stFormSubmitButton"] > button:hover span,
+    div[data-testid="stFormSubmitButton"] > button:hover div,
+    [data-testid="stSidebar"] .stButton > button:hover p,
+    [data-testid="stSidebar"] .stButton > button:hover span,
+    [data-testid="stSidebar"] .stButton > button:hover div {
+        color: #FFD700 !important;
+    }
+
 
 
     /* Barra de entrada del Chat */
