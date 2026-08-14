@@ -54,8 +54,8 @@ st.markdown("""
     /* Forzar fondo claro global y tipografía de alto contraste */
     html, body, [data-testid="stAppViewContainer"], .stApp {
         font-family: 'Inter', sans-serif !important;
-        background-color: #F4F6F9 !important;
-        color: #1A202C !important;
+        background-color: #FFC627 !important;
+        color: #FFC627 !important;
     }
 
     [data-testid="stHeader"] {
@@ -65,7 +65,7 @@ st.markdown("""
 
     /* Encabezados con color institucional Borgoña y tipografía Outfit */
     h1, h2, h3, h4, h5, h6, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
-        color: #FFC627 !important;
+        color: #800020 !important;
         font-family: 'Outfit', sans-serif !important;
         font-weight: 700 !important;
     }
